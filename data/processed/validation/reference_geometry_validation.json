@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "reference_file": "structures/GEOMETRY_reference.xyz",
+  "atom_count": 241,
+  "qmap_atom_count": 31,
+  "dmso_count": 21,
+  "phenolic_O_H_distance_A": 0.9987003569,
+  "minimum_OQMAP_ODMSO_distance_A": 2.6376620598,
+  "minimum_N1QMAP_SDMSO_distance_A": 4.4343166057,
+  "minimum_N2QMAP_SDMSO_distance_A": 4.3369873270,
+  "reference_frame_hbond_count": 1,
+  "reference_hbond_H_A_distance_A": 1.641,
+  "reference_hbond_D_H_A_angle_deg": 175.1,
+  "note": "Single-frame values validate atom selections and geometric implementations; they are not trajectory averages."
+}
