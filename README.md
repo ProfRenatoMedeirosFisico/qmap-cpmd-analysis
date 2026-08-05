@@ -1,97 +1,65 @@
 # QMAP–DMSO CPMD analysis
 
-Reproducibility repository for the manuscript:
+Reproducibility materials for **“Car-Parrinello Molecular Dynamics of QMAP-DMSO Microsolvation: First-Shell Structure and Solvent-Induced Polarization.”**
 
-**Car-Parrinello Molecular Dynamics of QMAP-DMSO Microsolvation: First-Shell Structure and Solvent-Induced Polarization**
+The production system is one QMAP plus 21 DMSO molecules (241 atoms) in a 16.0 Å cubic cell. The scripts were consolidated from analyses originally developed interactively and are explicitly documented as reimplementations.
 
-Authors: Renato Medeiros, Francisco A. P. Osório, Clodoaldo Valverde, and Ademir J. Camargo.
+## Included analyses
 
-## Scope
+- QMAP internal coordinates used in Figure 2;
+- finite-cluster O–O and N–S pair-distance distributions;
+- directional O–H···O(DMSO) hydrogen bonds;
+- QMAP and full-cluster dipoles from atomic charges;
+- qualitative ω²-weighted dipole-autocorrelation spectrum;
+- first- and second-rank orientational correlations.
 
-This repository is intended to provide the analysis scripts and processed files required to reproduce the structural, hydrogen-bond, dipole-moment, qualitative IR-like, and orientational-correlation results reported in the manuscript.
-
-> **Repository status:** preparation package. Before making the repository public and citing it in the manuscript, replace all `PENDING` items in `REPOSITORY_COMPLETION_CHECKLIST.md` with the actual scripts and processed outputs used in the study.
-
-## Repository structure
-
-```text
-scripts/
-  python/   Python analysis scripts
-  vmd/      VMD/Tcl scripts
-data/
-  processed/
-    figures/
-    tables/
-  example/  Small non-production examples, when permitted
-docs/       Method notes, atom selections, commands, and provenance
-```
-
-## Available script
-
-### `scripts/python/analisar_qmap_cpmd_correlacoes.py`
-
-Reads a multi-frame XYZ or PDB trajectory and can calculate:
-
-- QMAP molecular dipole from supplied atomic charges;
-- minimum O(QMAP)–O(DMSO) distance per frame;
-- a user-specified QMAP backbone dihedral;
-- time-series and correlation plots;
-- `qmap_correlacoes.csv` and an execution report.
-
-The automatic QMAP/DMSO assignment must be validated visually. Publication-quality runs must use the verified atom indices documented in `docs/ATOM_SELECTIONS.md`.
+No VMD/Tcl scripts were used; VMD was used only for visualization.
 
 ## Installation
 
-Python 3.10 or newer is recommended.
-
 ```bash
 python -m venv .venv
-```
-
-Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Linux/macOS:
+## Atom mapping
+
+The verified 1-based mapping is stored in `config/atom_indices.json`. It identifies QMAP as 31 atoms and reconstructs all 21 DMSO molecules from the production geometry.
+
+## Coordinate-based analyses
 
 ```bash
-source .venv/bin/activate
-pip install -r requirements.txt
+python scripts/python/structural_analysis.py --trajectory /path/to/TRAJEC.xyz
+python scripts/python/pair_distance_distributions.py --trajectory /path/to/TRAJEC.xyz
+python scripts/python/hydrogen_bonds.py --trajectory /path/to/TRAJEC.xyz
 ```
 
-## Basic execution
+The XYZ reader streams frames and ignores CPMD velocity columns, so the approximately 700 MB trajectory does not need to fit in memory.
+
+## Dipole, IR-like and orientational analyses
 
 ```bash
-python scripts/python/analisar_qmap_cpmd_correlacoes.py \
-  --traj path/to/trajectory.xyz \
-  --charges path/to/charges.txt \
-  --dihedral C2 C1 C3 C4 \
-  --outdir results/correlations
+python scripts/python/dipole_from_charges.py \
+  --trajectory /path/to/TRAJEC.xyz \
+  --charges /path/to/charges.txt
+
+python scripts/python/ir_like_spectrum.py \
+  --dipole-csv data/processed/figures03_05_dipoles/dipole_time_series.csv
+
+python scripts/python/orientational_correlations.py \
+  --dipole-csv data/processed/figures03_05_dipoles/dipole_time_series.csv
 ```
 
-The four dihedral indices are 1-based by default. Add `--zero-based` only when the supplied indices start at zero.
+`charges.txt` may contain one charge per atom, `index charge` pairs, or a matrix with one frame per row and 241 atom columns.
 
-## Reproducibility requirements before publication
+## Important status
 
-The public release should contain:
+The scripts and atom mapping were validated on the real 241-atom reference geometry. Complete manuscript CSV tables require a local run on the full trajectory. Dipole-dependent figures additionally require the original charge series or Cartesian dipole series. The proprietary Origin project is not treated as the archival data format.
 
-1. every Python script actually used to generate manuscript figures;
-2. every VMD/Tcl script and the exact atom selections;
-3. processed numerical tables underlying the figures;
-4. a command log or workflow showing how each figure was generated;
-5. software versions and dependencies;
-6. verified trajectory composition, atom ordering, time step, sampling interval, and units;
-7. a permanent archived release, preferably with a DOI.
+Large raw files are intentionally excluded from normal Git history. A permanent raw-data archive and DOI should be added before final submission.
 
-Large trajectories should normally be archived in Zenodo or another data repository rather than committed directly to GitHub. Git LFS is an alternative when a GitHub-hosted trajectory is necessary.
+## Citation and license
 
-## Citation
-
-Use `CITATION.cff`. Add the article DOI and repository archive DOI when available.
-
-## License
-
-The preparation package proposes the MIT License for code. Confirm that all authors agree before the public release. Data and manuscript figures may require a separate data license and publisher-policy check.
+Citation metadata are provided in `CITATION.cff`. Code is released under the MIT License, subject to agreement of all authors.
