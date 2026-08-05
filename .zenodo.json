@@ -1,0 +1,26 @@
+{
+  "creators": [
+    {"name": "Medeiros, Renato"},
+    {"name": "Osório, Francisco A. P."},
+    {"name": "Valverde, Clodoaldo"},
+    {"name": "Camargo, Ademir J."}
+  ],
+  "title": "QMAP-DMSO CPMD analysis",
+  "description": "Standalone and documented Python scripts, verified atom mappings, configuration files, and reproducibility documentation for the manuscript Car-Parrinello Molecular Dynamics of QMAP-DMSO Microsolvation: First-Shell Structure and Solvent-Induced Polarization.",
+  "version": "1.0.0",
+  "access_right": "open",
+  "keywords": [
+    "Car-Parrinello molecular dynamics",
+    "microsolvation",
+    "QMAP",
+    "DMSO",
+    "hydrogen bonding",
+    "dipole moment",
+    "orientational correlation",
+    "molecular dynamics",
+    "reproducible research"
+  ],
+  "license": "mit",
+  "upload_type": "software",
+  "language": "eng"
+}
