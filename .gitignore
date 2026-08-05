@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated results
+results/
+*.log
+
+# Large trajectories and CPMD restart files
+*.trj
+*.traj
+*.xyz
+*.pdb
+*.dcd
+*.xtc
+*.trr
+*.wfn
+*.restart
+*.RESTART*
+
+# Keep explicitly curated examples
+!data/example/*.xyz
+!data/example/*.pdb
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

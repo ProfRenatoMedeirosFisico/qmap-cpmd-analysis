@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use these scripts or data, please cite the associated manuscript and archived repository release."
+title: "QMAP-DMSO CPMD analysis"
+type: software
+authors:
+  - family-names: Medeiros
+    given-names: Renato
+  - family-names: Osório
+    given-names: Francisco A. P.
+  - family-names: Valverde
+    given-names: Clodoaldo
+  - family-names: Camargo
+    given-names: Ademir J.
+repository-code: "https://github.com/ProfRenatoMedeirosFisico/qmap-cpmd-analysis"
+license: MIT
+version: "0.1.0-prepublication"
+date-released: "2026-08-05"
+preferred-citation:
+  type: article
+  title: "Car-Parrinello Molecular Dynamics of QMAP-DMSO Microsolvation: First-Shell Structure and Solvent-Induced Polarization"
+  authors:
+    - family-names: Medeiros
+      given-names: Renato
+    - family-names: Osório
+      given-names: Francisco A. P.
+    - family-names: Valverde
+      given-names: Clodoaldo
+    - family-names: Camargo
+      given-names: Ademir J.
