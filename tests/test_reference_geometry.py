@@ -6,7 +6,7 @@ from qmap_cpmd_common import first_xyz_frame,load_mapping,validate_symbols,mic_d
 
 def test_reference_geometry():
     m=load_mapping(ROOT/'config/atom_indices.json')
-    f=first_xyz_frame(ROOT/'structures/GEOMETRY.xyz')
+    f=first_xyz_frame(ROOT/'structures/GEOMETRY_reference.xyz')
     validate_symbols(f.symbols,m)
     assert len(m['qmap']['atom_indices'])==31
     assert len(m['dmso_molecules'])==21
