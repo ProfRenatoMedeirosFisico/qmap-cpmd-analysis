@@ -1,0 +1,8 @@
+{
+  "trajectory": "PATH/TO/TRAJEC.xyz",
+  "mapping": "config/atom_indices.json",
+  "timestep_au": 5.0,
+  "saved_every_steps": 5,
+  "charges": null,
+  "dipole_csv": null
+}
